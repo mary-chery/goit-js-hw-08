@@ -15,12 +15,27 @@ populateText()
 
 formEl.addEventListener('submit', onFormSubmit);
 formEl.addEventListener('input', throttle(onInput, 500));
+// formEl.addEventListener('input', onInput);
+
+// function storageFormData(e) {
+//     formData[e.target.name] = e.target.value.trim();
+//     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+// }
 
 function onFormSubmit(event) {
     event.preventDefault();
 
+    if (emailEl.value === "" || messEl.value === "") {
+        alert(`Please fill in all the fields!`);
+    } 
+
+    const savedDatas = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    console.log(savedDatas);
+
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
+    formData = {};
+
 }
 
 function onInput(event) {
